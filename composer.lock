@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c2c30cac68a46b82287ed333ed37ac8",
+    "content-hash": "7d8d42682a64e8d16ec68ec6a1d6e494",
     "packages": [
         {
             "name": "brick/math",
@@ -8507,16 +8507,16 @@
         },
         {
             "name": "nunomaduro/pao",
-            "version": "0.x-dev",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/pao.git",
-                "reference": "a074e02761bcf69c8810628be52b516a77028155"
+                "reference": "c3cec982929c9bd9fbd6da2c6eb26f34d089ab86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/pao/zipball/a074e02761bcf69c8810628be52b516a77028155",
-                "reference": "a074e02761bcf69c8810628be52b516a77028155",
+                "url": "https://api.github.com/repos/nunomaduro/pao/zipball/c3cec982929c9bd9fbd6da2c6eb26f34d089ab86",
+                "reference": "c3cec982929c9bd9fbd6da2c6eb26f34d089ab86",
                 "shasum": ""
             },
             "require": {
@@ -8539,7 +8539,6 @@
                 "symfony/process": "^7.4.5 || ^8.1.0",
                 "symfony/var-dumper": "^7.4.6 || ^8.0.8"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "pest": {
@@ -8569,9 +8568,7 @@
             "description": "Agent-optimized output for PHP testing tools",
             "keywords": [
                 "Agent",
-                "PHPStan",
                 "json",
-                "paratest",
                 "pest",
                 "php",
                 "phpunit",
@@ -8579,7 +8576,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nunomaduro/pao/issues",
-                "source": "https://github.com/nunomaduro/pao/tree/0.x"
+                "source": "https://github.com/nunomaduro/pao/tree/v0.1.1"
             },
             "funding": [
                 {
@@ -8595,7 +8592,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2026-04-07T17:37:19+00:00"
+            "time": "2026-04-07T16:17:44+00:00"
         },
         {
             "name": "nunomaduro/pokio",
@@ -12883,7 +12880,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "nunomaduro/pao": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
