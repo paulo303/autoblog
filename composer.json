@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.5.0",
         "laravel/framework": "^13.4.0",
+        "livewire/livewire": "^4.2",
         "nunomaduro/essentials": "^1.2.0"
     },
     "require-dev": {

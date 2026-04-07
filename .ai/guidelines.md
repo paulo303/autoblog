@@ -5,7 +5,7 @@ This document consolidates development, architecture, and project stack guidelin
 ## 1. Project Stack & Environment
 
 - **Backend:** Laravel 13 (PHP 8.5)
-- **Frontend:** TailwindCSS
+- **Frontend:** Livewire 4, TailwindCSS
 - **Database:** PostgreSQL with `pgvector`
 - **Testing:** Pest v5
 - **Tooling:** Laravel Boost (MCP), Larastan v3, Pint, Rector v2, Pao v0

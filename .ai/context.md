@@ -1,6 +1,7 @@
 Project stack:
 
 Laravel 13
+Livewire 4
 TailwindCSS
 Pest
 PostgreSQL
