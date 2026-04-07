@@ -20,6 +20,7 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - pestphp/pest (PEST) - v5
 - phpunit/phpunit (PHPUNIT) - v13
 - rector/rector (RECTOR) - v2
+- nunomaduro/pao (PAO) - V0
 
 ## Skills Activation
 
