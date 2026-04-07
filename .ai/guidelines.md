@@ -20,7 +20,7 @@ Strictly follow these architectural choices:
 - **Service Classes:** Encapsulate core business logic in Services.
 - **Controllers:** Must be "thin". Delegate logic to Services/Processes.
 - **Validation:** Always use `FormRequest`.
-  - **Tip:** `UpdateFormRequest` should extend `CreateFormRequest` to avoid duplication.
+- **Tip:** `UpdateFormRequest` should extend `CreateFormRequest` to avoid duplication.
 
 ## 3. General Guidelines
 
