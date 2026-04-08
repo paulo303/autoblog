@@ -16,7 +16,7 @@ final class DestroyPostImageController
         Storage::disk('public')->delete($image->path);
         $image->delete();
 
-        return redirect()->route('admin.posts.edit', $postId)
+        return to_route('admin.posts.edit', $postId)
             ->with('success', 'Imagem removida com sucesso!');
     }
 }

@@ -2,17 +2,20 @@
 
 declare(strict_types=1);
 
+use App\Models\Post;
+use App\Models\PostImage;
+
 arch()->preset()->php()->ignoring([
-    'App\Models\Post',
-    'App\Models\PostImage',
+    Post::class,
+    PostImage::class,
 ]);
 arch()->preset()->strict()->ignoring([
-    'App\Models\Post',
-    'App\Models\PostImage',
+    Post::class,
+    PostImage::class,
 ]);
 arch()->preset()->laravel()->ignoring([
-    'App\Models\Post',
-    'App\Models\PostImage',
+    Post::class,
+    PostImage::class,
 ]);
 arch()->preset()->security()->ignoring([
     'assert',

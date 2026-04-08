@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Models\Post;
 use Illuminate\Database\Seeder;
 
 final class PostSeeder extends Seeder
@@ -13,8 +14,8 @@ final class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Post::factory(10)->published()->create();
-        \App\Models\Post::factory(5)->create();
-        \App\Models\Post::factory(3)->archived()->create();
+        Post::factory(10)->published()->create();
+        Post::factory(5)->create();
+        Post::factory(3)->archived()->create();
     }
 }

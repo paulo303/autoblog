@@ -3,14 +3,15 @@
 declare(strict_types=1);
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
-it('shows the login page', function () {
+it('shows the login page', function (): void {
     $this->get(route('login'))->assertOk();
 });
 
-it('admin user can login and is redirected to admin posts', function () {
+it('admin user can login and is redirected to admin posts', function (): void {
     $user = User::factory()->create([
         'email' => 'admin@autoblog.com',
         'password' => bcrypt('password'),
@@ -25,7 +26,7 @@ it('admin user can login and is redirected to admin posts', function () {
     $this->assertAuthenticatedAs($user);
 });
 
-it('rejects invalid credentials', function () {
+it('rejects invalid credentials', function (): void {
     User::factory()->create(['email' => 'admin@autoblog.com', 'password' => bcrypt('password')]);
 
     $response = $this->post(route('login.post'), [
@@ -37,11 +38,11 @@ it('rejects invalid credentials', function () {
     $this->assertGuest();
 });
 
-it('unauthenticated user is redirected from admin routes', function () {
+it('unauthenticated user is redirected from admin routes', function (): void {
     $this->get(route('admin.posts.index'))->assertRedirect(route('login'));
 });
 
-it('authenticated user can logout', function () {
+it('authenticated user can logout', function (): void {
     $user = User::factory()->create();
 
     $this->actingAs($user)

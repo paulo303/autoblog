@@ -8,6 +8,7 @@ use App\Enums\PostStatus;
 use App\Http\Requests\Admin\StorePostRequest;
 use App\Http\Requests\Admin\UpdatePostRequest;
 use App\Models\Post;
+use App\Models\PostImage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -16,31 +17,32 @@ final class PostController
 {
     public function index(): View
     {
-        $posts = Post::orderByDesc('created_at')->paginate(15);
+        $posts = Post::query()->latest()->paginate(15);
 
-        return view('admin.posts.index', compact('posts'));
+        return view('admin.posts.index', ['posts' => $posts]);
     }
 
     public function create(): View
     {
         $statuses = PostStatus::cases();
 
-        return view('admin.posts.create', compact('statuses'));
+        return view('admin.posts.create', ['statuses' => $statuses]);
     }
 
     public function store(StorePostRequest $request): RedirectResponse
     {
+        /** @var array<string, mixed> $data */
         $data = $request->safe()->except('images');
 
         if ($data['status'] === PostStatus::Published->value && empty($data['published_at'])) {
             $data['published_at'] = now();
         }
 
-        $post = Post::create($data);
+        $post = Post::query()->create($data);
 
         $this->handleImageUploads($request, $post);
 
-        return redirect()->route('admin.posts.index')
+        return to_route('admin.posts.index')
             ->with('success', 'Post criado com sucesso!');
     }
 
@@ -48,7 +50,7 @@ final class PostController
     {
         $post->load('images');
 
-        return view('admin.posts.show', compact('post'));
+        return view('admin.posts.show', ['post' => $post]);
     }
 
     public function edit(Post $post): View
@@ -56,11 +58,12 @@ final class PostController
         $post->load('images');
         $statuses = PostStatus::cases();
 
-        return view('admin.posts.edit', compact('post', 'statuses'));
+        return view('admin.posts.edit', ['post' => $post, 'statuses' => $statuses]);
     }
 
     public function update(UpdatePostRequest $request, Post $post): RedirectResponse
     {
+        /** @var array<string, mixed> $data */
         $data = $request->safe()->except('images');
 
         if ($data['status'] === PostStatus::Published->value && empty($data['published_at']) && ! $post->published_at) {
@@ -71,19 +74,20 @@ final class PostController
 
         $this->handleImageUploads($request, $post);
 
-        return redirect()->route('admin.posts.index')
+        return to_route('admin.posts.index')
             ->with('success', 'Post atualizado com sucesso!');
     }
 
     public function destroy(Post $post): RedirectResponse
     {
+        /** @var PostImage $image */
         foreach ($post->images as $image) {
-            Storage::disk('public')->delete($image->path);
+            Storage::disk('public')->delete((string) $image->path);
         }
 
         $post->delete();
 
-        return redirect()->route('admin.posts.index')
+        return to_route('admin.posts.index')
             ->with('success', 'Post excluído com sucesso!');
     }
 

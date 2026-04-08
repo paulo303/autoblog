@@ -11,6 +11,7 @@
         "laravel-best-practices",
         "livewire-development",
         "tailwindcss-development",
-        "frontend-design"
+        "frontend-design",
+        "youtube-to-blog"
     ]
 }

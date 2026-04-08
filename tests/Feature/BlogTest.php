@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 use App\Enums\PostStatus;
 use App\Models\Post;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
-it('shows only published posts on the blog index', function () {
+it('shows only published posts on the blog index', function (): void {
     Post::factory()->published()->create(['title' => 'Published Post']);
     Post::factory()->create(['title' => 'Draft Post', 'status' => PostStatus::Draft]);
     Post::factory()->archived()->create(['title' => 'Archived Post']);
@@ -20,7 +21,7 @@ it('shows only published posts on the blog index', function () {
     $response->assertDontSee('Archived Post');
 });
 
-it('orders posts from newest to oldest', function () {
+it('orders posts from newest to oldest', function (): void {
     Post::factory()->published()->create([
         'title' => 'Old Post',
         'published_at' => now()->subDays(10),
@@ -33,12 +34,13 @@ it('orders posts from newest to oldest', function () {
     $response = $this->get(route('blog.index'));
 
     $response->assertOk();
-    $newPos = mb_strpos($response->getContent(), 'New Post');
-    $oldPos = mb_strpos($response->getContent(), 'Old Post');
+
+    $newPos = mb_strpos((string) $response->getContent(), 'New Post');
+    $oldPos = mb_strpos((string) $response->getContent(), 'Old Post');
     expect($newPos)->toBeLessThan($oldPos);
 });
 
-it('shows 5 posts per page and a load more button when there are more', function () {
+it('shows 5 posts per page and a load more button when there are more', function (): void {
     Post::factory(8)->published()->create();
 
     $response = $this->get(route('blog.index'));
@@ -47,19 +49,20 @@ it('shows 5 posts per page and a load more button when there are more', function
     $response->assertSee('Ler mais');
 });
 
-it('loads next posts on page 2', function () {
+it('loads next posts on page 2', function (): void {
     Post::factory(8)->published()->sequence(
-        fn ($seq) => ['published_at' => now()->subDays($seq->index + 1)]
+        fn ($seq): array => ['published_at' => now()->subDays($seq->index + 1)]
     )->create();
 
     $response = $this->get(route('blog.index').'?page=2');
 
     $response->assertOk();
-    $posts = Post::published()->latestPublished()->paginate(5, page: 2);
+
+    $posts = Post::query()->published()->latestPublished()->paginate(5, page: 2);
     expect($posts->count())->toBe(3);
 });
 
-it('shows a published post on the individual page', function () {
+it('shows a published post on the individual page', function (): void {
     $post = Post::factory()->published()->create(['title' => 'My Published Post']);
 
     $response = $this->get(route('blog.show', $post->slug));
@@ -68,7 +71,7 @@ it('shows a published post on the individual page', function () {
     $response->assertSee('My Published Post');
 });
 
-it('returns 404 for unpublished post on the individual page', function () {
+it('returns 404 for unpublished post on the individual page', function (): void {
     $draft = Post::factory()->create(['status' => PostStatus::Draft]);
     $archived = Post::factory()->archived()->create();
 

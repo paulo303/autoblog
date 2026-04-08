@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Admin;
 
+use App\Enums\PostStatus;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 final class StorePostRequest extends FormRequest
 {
@@ -28,7 +30,7 @@ final class StorePostRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
             'excerpt' => ['nullable', 'string', 'max:500'],
-            'status' => ['required', 'string', \Illuminate\Validation\Rule::enum(\App\Enums\PostStatus::class)],
+            'status' => ['required', 'string', Rule::enum(PostStatus::class)],
             'published_at' => ['nullable', 'date'],
             'images' => ['nullable', 'array'],
             'images.*' => ['image', 'max:5120'],
