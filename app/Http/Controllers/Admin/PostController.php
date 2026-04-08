@@ -30,7 +30,7 @@ final class PostController
 
     public function store(StorePostRequest $request): RedirectResponse
     {
-        $data = $request->validated();
+        $data = $request->safe()->except('images');
 
         if ($data['status'] === PostStatus::Published->value && empty($data['published_at'])) {
             $data['published_at'] = now();
@@ -61,7 +61,7 @@ final class PostController
 
     public function update(UpdatePostRequest $request, Post $post): RedirectResponse
     {
-        $data = $request->validated();
+        $data = $request->safe()->except('images');
 
         if ($data['status'] === PostStatus::Published->value && empty($data['published_at']) && ! $post->published_at) {
             $data['published_at'] = now();
