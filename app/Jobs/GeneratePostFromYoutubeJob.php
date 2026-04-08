@@ -16,6 +16,10 @@ final class GeneratePostFromYoutubeJob implements ShouldQueue
 
     public int $timeout = 180;
 
+    public int $tries = 3;
+
+    public int $backoff = 30;
+
     public function __construct(public readonly string $youtubeUrl) {}
 
     public function handle(GeneratePostFromYoutube $action): void

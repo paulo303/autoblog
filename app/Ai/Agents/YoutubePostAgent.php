@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Ai\Agents;
 
 use Illuminate\Contracts\JsonSchema\JsonSchema;
+use Laravel\Ai\Attributes\Timeout;
 use Laravel\Ai\Attributes\UseSmartestModel;
 use Laravel\Ai\Contracts\Agent;
 use Laravel\Ai\Contracts\HasStructuredOutput;
@@ -14,6 +15,7 @@ use Laravel\Ai\Promptable;
 use Laravel\Ai\Providers\Tools\WebSearch;
 
 #[UseSmartestModel]
+#[Timeout(0)]
 final class YoutubePostAgent implements Agent, HasStructuredOutput, HasTools
 {
     use Promptable;
