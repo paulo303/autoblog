@@ -1,19 +1,16 @@
 {
     "agents": [
-        "claude_code",
-        "cursor",
-        "opencode",
-        "junie",
-        "copilot",
-        "gemini",
-        "codex",
-        "amp"
+        "junie"
     ],
     "guidelines": true,
     "mcp": true,
     "nightwatch_mcp": false,
     "sail": false,
     "skills": [
-        "laravel-best-practices"
+        "ai-sdk-development",
+        "laravel-best-practices",
+        "livewire-development",
+        "tailwindcss-development",
+        "frontend-design"
     ]
 }
